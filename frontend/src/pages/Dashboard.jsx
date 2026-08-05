@@ -25,8 +25,8 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 export default function Dashboard() {
   const [weatherData, setWeatherData] = useState([]);
-  const [loading, setLoading]         = useState(true);
-  const [error, setError]             = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => { fetchData(); }, []);
 
@@ -37,9 +37,9 @@ export default function Dashboard() {
       const res = await getWeatherData(30);
       const formatted = res.data.data.map((row) => ({
         ...row,
-        date:        new Date(row.date).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' }),
+        date: new Date(row.date).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' }),
         temperature: Number(row.temperature),
-        humidity:    Number(row.humidity),
+        humidity: Number(row.humidity),
       }));
       setWeatherData(formatted);
     } catch (err) {
@@ -50,15 +50,38 @@ export default function Dashboard() {
     }
   };
 
-  const latest        = weatherData[weatherData.length - 1];
-  const maxTemp       = Math.max(...weatherData.map((d) => d.temperature), 0);
+  const latest = weatherData[weatherData.length - 1];
+  const maxTemp = Math.max(...weatherData.map((d) => d.temperature), 0);
   const heatwaveCount = weatherData.filter((d) => d.temperature > HEATWAVE_THRESHOLD).length;
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10 fade-in-up" id="dashboard-page">
+
+      {/* ✅ SEO IMPROVED HEADER */}
       <div className="mb-10">
-        <h1 className="font-display text-4xl font-extrabold text-white mb-2">Dashboard</h1>
-        <p className="text-slate-400 text-sm">Live temperature and humidity trends with heatwave analysis</p>
+        <h1 className="font-display text-4xl font-extrabold text-white mb-2">
+          Heatwave Monitoring Dashboard
+        </h1>
+
+        <h2 className="text-slate-300 text-lg mb-2">
+          Real-Time Temperature and Heatwave Analysis
+        </h2>
+
+        <p className="text-slate-400 text-sm max-w-2xl">
+          The Heatwave Monitoring Dashboard provides real-time insights into temperature
+          and humidity trends. It helps users track extreme weather conditions,
+          identify high-risk heatwave zones, and analyze historical climate data
+          for better safety and decision-making.
+        </p>
+
+        {/* ✅ Anchor link for SEO */}
+        <a
+          href="/prediction"
+          title="View Heatwave Prediction Page"
+          className="text-orange-400 text-sm underline mt-2 inline-block"
+        >
+          View Heatwave Predictions
+        </a>
       </div>
 
       {error && (
@@ -97,13 +120,15 @@ export default function Dashboard() {
 
           {/* Temperature chart */}
           <div className="glass p-6 mb-6">
-            <h2 className="font-display font-semibold text-white text-base mb-1">Temperature Trend</h2>
+            <h2 className="font-display font-semibold text-white text-base mb-1">
+              Temperature Trend
+            </h2>
             <p className="text-slate-500 text-xs mb-6">Degrees Celsius over time</p>
             <ResponsiveContainer width="100%" height={300}>
               <AreaChart data={weatherData}>
                 <defs>
                   <linearGradient id="tempGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%"  stopColor="#f97316" stopOpacity={0.25} />
+                    <stop offset="5%" stopColor="#f97316" stopOpacity={0.25} />
                     <stop offset="95%" stopColor="#f97316" stopOpacity={0.02} />
                   </linearGradient>
                 </defs>
@@ -135,13 +160,15 @@ export default function Dashboard() {
 
           {/* Humidity chart */}
           <div className="glass p-6">
-            <h2 className="font-display font-semibold text-white text-base mb-1">Humidity Trend</h2>
+            <h2 className="font-display font-semibold text-white text-base mb-1">
+              Humidity Trend
+            </h2>
             <p className="text-slate-500 text-xs mb-6">Relative humidity percentage over time</p>
             <ResponsiveContainer width="100%" height={260}>
               <AreaChart data={weatherData}>
                 <defs>
                   <linearGradient id="humGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%"  stopColor="#3b82f6" stopOpacity={0.25} />
+                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.25} />
                     <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.02} />
                   </linearGradient>
                 </defs>

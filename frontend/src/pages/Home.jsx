@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet'; // ✅ ADD THIS
 
 const features = [
   {
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
       </svg>
     ),
     title: 'Live Dashboard',
@@ -16,7 +17,7 @@ const features = [
   {
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/>
+        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
       </svg>
     ),
     title: 'Heatwave Prediction',
@@ -28,7 +29,7 @@ const features = [
   {
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" />
       </svg>
     ),
     title: 'Instant Alerts',
@@ -48,83 +49,109 @@ const steps = [
 
 export default function Home() {
   return (
-    <div className="hero-bg" id="home-page">
-      {/* Hero */}
-      <section className="max-w-6xl mx-auto px-4 pt-24 pb-20 text-center fade-in-up">
-        <h1 className="text-5xl md:text-7xl font-display font-extrabold leading-tight mb-6 text-white">
-          Stay Ahead of the{' '}
-          <span className="gradient-text">Heat</span>
-        </h1>
+    <>
+      {/* ✅ SEO TAGS */}
+      <Helmet>
+        <title>Heatwave Monitor | Real-Time Heat Risk Platform</title>
 
-        <p className="text-slate-400 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed mb-10">
-          A real-time platform to track temperature and humidity, predict heatwave
-          conditions, and alert communities before extreme heat strikes.
-        </p>
+        {/* Meta Tags */}
+        <meta
+          name="description"
+          content="Real-time heatwave monitoring, prediction, and alerts. Track temperature and humidity trends and stay safe from extreme heat."
+        />
+        <meta
+          name="keywords"
+          content="heatwave monitoring, weather tracking, temperature prediction, humidity analysis, climate alerts"
+        />
+        <meta name="robots" content="index, follow" />
 
-        <div className="flex flex-wrap justify-center gap-4">
-          <Link to="/prediction" id="cta-predict" className="btn-primary text-base px-8 py-3.5">
-            Run a Prediction
-          </Link>
-          <Link to="/dashboard" className="btn-secondary text-base px-8 py-3.5">
-            View Dashboard
-          </Link>
-        </div>
+        {/* Open Graph (for sharing) */}
+        <meta property="og:title" content="Heatwave Monitor Platform" />
+        <meta property="og:description" content="Track and predict heatwaves in real time." />
+        <meta property="og:type" content="website" />
 
-        {/* Decorative line chart */}
-        <div className="mt-20 opacity-20 pointer-events-none select-none">
-          <svg viewBox="0 0 800 80" className="w-full max-w-2xl mx-auto" fill="none" stroke="#f97316" strokeWidth="2">
-            <polyline points="0,70 100,50 180,60 260,30 340,45 420,10 500,25 580,5 680,20 800,15" />
-          </svg>
-        </div>
-      </section>
+      </Helmet>
 
-      {/* Feature cards */}
-      <section className="max-w-6xl mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {features.map((f, i) => (
-            <div
-              key={i}
-              className="glass p-7 hover:scale-[1.02] transition-all duration-300 cursor-default"
-              style={{ borderColor: f.border }}
-            >
+      <div className="hero-bg" id="home-page">
+        {/* Hero */}
+        <section className="max-w-6xl mx-auto px-4 pt-24 pb-20 text-center fade-in-up">
+          <h1 className="text-5xl md:text-7xl font-display font-extrabold leading-tight mb-6 text-white">
+            Stay Ahead of the{' '}
+            <span className="gradient-text">Heat</span>
+          </h1>
+
+          <p className="text-slate-400 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed mb-10">
+            A real-time platform to track temperature and humidity, predict heatwave
+            conditions, and alert communities before extreme heat strikes.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-4">
+            {/* ✅ Anchor + Title for SEO */}
+            <Link to="/prediction" id="cta-predict" title="Run Heatwave Prediction Tool" className="btn-primary text-base px-8 py-3.5">
+              Run a Prediction
+            </Link>
+
+            <Link to="/dashboard" title="View Weather Dashboard" className="btn-secondary text-base px-8 py-3.5">
+              View Dashboard
+            </Link>
+          </div>
+
+          <div className="mt-20 opacity-20 pointer-events-none select-none">
+            <svg viewBox="0 0 800 80" className="w-full max-w-2xl mx-auto" fill="none" stroke="#f97316" strokeWidth="2">
+              <polyline points="0,70 100,50 180,60 260,30 340,45 420,10 500,25 580,5 680,20 800,15" />
+            </svg>
+          </div>
+        </section>
+
+        {/* Feature cards */}
+        <section className="max-w-6xl mx-auto px-4 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {features.map((f, i) => (
               <div
-                className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-gradient-to-br ${f.color}`}
-                style={{ color: f.iconColor }}
+                key={i}
+                className="glass p-7 hover:scale-[1.02] transition-all duration-300 cursor-default"
+                style={{ borderColor: f.border }}
               >
-                {f.icon}
-              </div>
-              <h3 className="font-display font-bold text-white text-lg mb-2">{f.title}</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">{f.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section className="max-w-6xl mx-auto px-4 py-16">
-        <div className="glass p-10">
-          <h2 className="font-display text-3xl font-bold text-white mb-2">How it works</h2>
-          <p className="text-slate-500 mb-10 text-sm">Four steps from reading to alert</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {steps.map((s, i) => (
-              <div key={i} className="relative">
                 <div
-                  className="text-5xl font-display font-extrabold mb-4 leading-none"
-                  style={{ WebkitTextStroke: '1px rgba(249,115,22,0.35)', color: 'transparent' }}
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-gradient-to-br ${f.color}`}
+                  style={{ color: f.iconColor }}
                 >
-                  {s.num}
+                  {f.icon}
                 </div>
-                <p className="text-slate-300 text-sm leading-relaxed">{s.text}</p>
-                {i < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-4 -right-4 text-slate-700 text-lg">›</div>
-                )}
+
+                {/* ✅ Proper Heading Tag */}
+                <h2 className="font-display font-bold text-white text-lg mb-2">{f.title}</h2>
+
+                <p className="text-slate-400 text-sm leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      <div className="h-16" />
-    </div>
+        {/* How it works */}
+        <section className="max-w-6xl mx-auto px-4 py-16">
+          <div className="glass p-10">
+            <h2 className="font-display text-3xl font-bold text-white mb-2">How it works</h2>
+            <p className="text-slate-500 mb-10 text-sm">Four steps from reading to alert</p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {steps.map((s, i) => (
+                <div key={i} className="relative">
+                  <div
+                    className="text-5xl font-display font-extrabold mb-4 leading-none"
+                    style={{ WebkitTextStroke: '1px rgba(249,115,22,0.35)', color: 'transparent' }}
+                  >
+                    {s.num}
+                  </div>
+                  <p className="text-slate-300 text-sm leading-relaxed">{s.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <div className="h-16" />
+      </div>
+    </>
   );
 }
