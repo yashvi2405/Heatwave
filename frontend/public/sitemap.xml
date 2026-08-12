@@ -8,4 +8,16 @@
        <changefreq>daily</changefreq>
        <priority>1.0000</priority>
   </url>
+   <url>
+        <loc>https://heatwave-jade.vercel.app/dashboard</loc>
+    </url>
+
+    <url>
+        <loc>https://heatwave-jade.vercel.app/prediction</loc>
+    </url>
+
+    <url>
+        <loc>https://heatwave-jade.vercel.app/alerts</loc>
+    </url>
+
 </urlset>
